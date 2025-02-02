@@ -1,15 +1,17 @@
 package br.com.sistema_ecommerce.repository.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @Entity
 @Table(name = "produto")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class ProdutoEntity {
+public class ProdutoEntity {
 
     @Id
     @Column(name = "id")

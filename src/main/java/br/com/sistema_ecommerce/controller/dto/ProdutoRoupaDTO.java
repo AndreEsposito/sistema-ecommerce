@@ -1,11 +1,11 @@
 package br.com.sistema_ecommerce.controller.dto;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Setter
+@Getter
 @SuperBuilder
 public class ProdutoRoupaDTO extends ProdutoDTO {
     private String tamanho;

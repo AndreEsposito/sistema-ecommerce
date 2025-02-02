@@ -1,11 +1,14 @@
 package br.com.sistema_ecommerce.controller.dto;
 
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@Data
+@Setter
+@Getter
 @SuperBuilder
-public abstract class ProdutoDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+public class ProdutoDTO {
     private Long id;
     private String nome;
     private Double preco;

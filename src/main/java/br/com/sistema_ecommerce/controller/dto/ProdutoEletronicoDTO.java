@@ -3,8 +3,8 @@ package br.com.sistema_ecommerce.controller.dto;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Setter
+@Getter
 @SuperBuilder
 public class ProdutoEletronicoDTO extends ProdutoDTO {
     private String marca;
