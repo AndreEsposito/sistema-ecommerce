@@ -2,16 +2,17 @@ package br.com.sistema_ecommerce.controller;
 
 import br.com.sistema_ecommerce.controller.dto.ProdutoDTO;
 import br.com.sistema_ecommerce.service.ProdutoService;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/produtos")
 public class ProdutoController {
-    private final ProdutoService produtoService;
+
+    @Autowired
+    private ProdutoService produtoService;
 
     @PostMapping("/{categoria}")
     public ResponseEntity<?> incluir(@PathVariable String categoria, @RequestBody ProdutoDTO requestDTO) {
@@ -25,13 +26,13 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.OK).body(produtoAtualizado);
     }
 
-    @DeleteMapping("/{id}}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> removerPorId(@PathVariable Long id) {
         produtoService.removerPorId(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping("/{categoria}")
+    @GetMapping("/categoria/{categoria}")
     public ResponseEntity<?> listarTodosPorCategoria(@PathVariable String categoria) {
         var produtos = produtoService.listarTodosPorCategoria(categoria);
         return ResponseEntity.status(HttpStatus.OK).body(produtos);
@@ -40,6 +41,6 @@ public class ProdutoController {
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         var produto = produtoService.buscarPorId(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(produto);
     }
 }
