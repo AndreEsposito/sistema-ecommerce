@@ -26,13 +26,13 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.OK).body(produtoAtualizado);
     }
 
-    @DeleteMapping("/{id}}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> removerPorId(@PathVariable Long id) {
         produtoService.removerPorId(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping("/{categoria}")
+    @GetMapping("/categoria/{categoria}")
     public ResponseEntity<?> listarTodosPorCategoria(@PathVariable String categoria) {
         var produtos = produtoService.listarTodosPorCategoria(categoria);
         return ResponseEntity.status(HttpStatus.OK).body(produtos);
@@ -41,6 +41,6 @@ public class ProdutoController {
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         var produto = produtoService.buscarPorId(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(produto);
     }
 }

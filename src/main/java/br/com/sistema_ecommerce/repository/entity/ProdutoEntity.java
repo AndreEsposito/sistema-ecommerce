@@ -1,16 +1,15 @@
 package br.com.sistema_ecommerce.repository.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
 @Getter
 @Setter
-@SuperBuilder
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "produto")
-@Inheritance(strategy = InheritanceType.JOINED)
 public class ProdutoEntity {
 
     @Id
@@ -26,6 +25,26 @@ public class ProdutoEntity {
     @Column(name = "quantidade")
     private Integer quantidade;
 
-    @Column(name = "catoria")
+    @Column(name = "categoria")
     private String categoria;
+
+    // Eletronicos
+    @Column(name = "marca")
+    private String marca;
+
+    @Column(name = "modelo")
+    private String modelo;
+
+    @Column(name = "duracao_bateria")
+    private String duracaoBateria;
+
+    @Column(name = "peso")
+    private Double peso;
+
+    // Roupas
+    @Column(name = "tamanho")
+    private String tamanho;
+
+    @Column(name = "material")
+    private String material;
 }
