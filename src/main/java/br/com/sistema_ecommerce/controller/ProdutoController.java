@@ -41,6 +41,6 @@ public class ProdutoController {
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
         var produto = produtoService.buscarPorId(id);
-        return ResponseEntity.ok(produto);
+        return ResponseEntity.status(HttpStatus.OK).body(produto);
     }
 }
