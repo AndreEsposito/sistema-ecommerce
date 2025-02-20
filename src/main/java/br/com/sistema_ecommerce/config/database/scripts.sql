@@ -5,7 +5,7 @@ CREATE DATABASE sistema_ecommerce;
 USE sistema_ecommerce;
 
 CREATE TABLE produto (
-    id INT PRIMARY KEY,
+    id_produto INT PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL,
     quantidade INT NOT NULL,
@@ -16,4 +16,16 @@ CREATE TABLE produto (
     peso DECIMAL(10, 2),
     tamanho VARCHAR(10),
     material VARCHAR(50)
+);
+
+CREATE TABLE carrinho_compras (
+    id_carrinho INT AUTO_INCREMENT PRIMARY KEY
+);
+
+CREATE TABLE carrinho_produtos (
+    id_carrinho INT,
+    id_produto INT,
+    PRIMARY KEY (id_carrinho, id_produto),
+    FOREIGN KEY (id_carrinho) REFERENCES carrinho_compras(id_carrinho) ON DELETE CASCADE,
+    FOREIGN KEY (id_produto) REFERENCES produto(id_produto) ON DELETE CASCADE
 );
