@@ -3,8 +3,7 @@ package br.com.sistema_ecommerce.repository.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,7 +12,7 @@ import lombok.*;
 public class ProdutoEntity {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id_produto")
     private Long id;
 
     @Column(name = "nome")

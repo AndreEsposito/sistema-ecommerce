@@ -3,8 +3,7 @@ package br.com.sistema_ecommerce.controller.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
-@Setter
-@Getter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
