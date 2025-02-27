@@ -1,11 +1,11 @@
 package br.com.sistema_ecommerce.service;
 
+import br.com.sistema_ecommerce.config.exception.NotFoundException;
 import br.com.sistema_ecommerce.controller.dto.ProdutoDTO;
 import br.com.sistema_ecommerce.mapper.ProdutoMapper;
 import br.com.sistema_ecommerce.repository.ProdutoRepository;
 import br.com.sistema_ecommerce.repository.entity.ProdutoEntity;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class ProdutoService {
     public ProdutoDTO atualizarPorId(Long id, ProdutoDTO requestDTO) {
         requestDTO.setId(id);
 
-        repository.findById(id).orElseThrow(() -> new DuplicateKeyException("Produto não encontrado"));
+        repository.findById(id).orElseThrow(() -> new NotFoundException("Produto não encontrado"));
 
         repository.deleteById(id);
 
@@ -40,7 +40,7 @@ public class ProdutoService {
     }
 
     public void removerPorId(Long id) {
-        repository.findById(id).orElseThrow(() -> new DuplicateKeyException("Produto não encontrado"));
+        repository.findById(id).orElseThrow(() -> new NotFoundException("Produto não encontrado"));
         repository.deleteById(id);
     }
 
@@ -54,6 +54,6 @@ public class ProdutoService {
     public ProdutoDTO buscarPorId(Long id) {
         return repository.findById(id)
                 .map(mapper::toDTO)
-                .orElseThrow(() -> new DuplicateKeyException("Produto não encontrado"));
+                .orElseThrow(() -> new NotFoundException("Produto não encontrado"));
     }
 }
