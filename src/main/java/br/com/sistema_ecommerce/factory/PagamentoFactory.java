@@ -1,9 +1,6 @@
 package br.com.sistema_ecommerce.factory;
 
-import br.com.sistema_ecommerce.strategy.PagamentoBoleto;
-import br.com.sistema_ecommerce.strategy.PagamentoCartaoCredito;
-import br.com.sistema_ecommerce.strategy.PagamentoPix;
-import br.com.sistema_ecommerce.strategy.PagamentoStrategy;
+import br.com.sistema_ecommerce.strategy.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +11,7 @@ public class PagamentoFactory {
     static {
         metodosPagamento.put("pix", new PagamentoPix());
         metodosPagamento.put("crédito", new PagamentoCartaoCredito());
-        metodosPagamento.put("débito", new PagamentoCartaoCredito());
+        metodosPagamento.put("débito", new PagamentoCartaoDebito());
         metodosPagamento.put("boleto", new PagamentoBoleto());
     }
 
