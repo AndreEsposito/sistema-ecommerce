@@ -29,3 +29,10 @@ CREATE TABLE carrinho_produtos (
     FOREIGN KEY (id_carrinho) REFERENCES carrinho_compras(id_carrinho) ON DELETE CASCADE,
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto) ON DELETE CASCADE
 );
+
+CREATE TABLE pagamento (
+    id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
+    metodo VARCHAR(20) NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
+    status ENUM('Pendente', 'Aprovado', 'Recusado', 'Cancelado') NOT NULL
+);
