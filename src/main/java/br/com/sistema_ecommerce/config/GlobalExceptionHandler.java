@@ -1,25 +1,43 @@
 package br.com.sistema_ecommerce.config;
 
-import org.springframework.dao.DuplicateKeyException;
+import br.com.sistema_ecommerce.config.exception.BadRequestException;
+import br.com.sistema_ecommerce.config.exception.NotFoundException;
+import br.com.sistema_ecommerce.config.exception.RegrasDeNegocioException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+import java.util.HashMap;
+import java.util.Map;
+
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(DuplicateKeyException.class)
-    public ResponseEntity<String> handleDuplicateKeyException(DuplicateKeyException ex) {
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body("Erro: " + ex.getMessage());
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Object> handlePagamentoNaoEncontrado(NotFoundException ex) {
+        return buildErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
-        return ResponseEntity
-                .status(HttpStatus.UNPROCESSABLE_ENTITY)
-                .body("Erro: " + ex.getMessage());
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<Object> handleMetodoPagamentoInvalido(BadRequestException ex) {
+        return buildErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(RegrasDeNegocioException.class)
+    public ResponseEntity<Object> handleRegrasDeNegocioException(RegrasDeNegocioException ex) {
+        return buildErrorResponse(ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleGenericException(Exception ex) {
+        return buildErrorResponse("Erro interno no servidor: " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    private ResponseEntity<Object> buildErrorResponse(String mensagem, HttpStatus status) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("erro", mensagem);
+        body.put("status", status.value());
+        return new ResponseEntity<>(body, status);
     }
 }

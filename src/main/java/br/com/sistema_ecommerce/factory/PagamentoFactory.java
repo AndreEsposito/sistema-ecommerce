@@ -1,5 +1,6 @@
 package br.com.sistema_ecommerce.factory;
 
+import br.com.sistema_ecommerce.config.exception.RegrasDeNegocioException;
 import br.com.sistema_ecommerce.strategy.*;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class PagamentoFactory {
     public static PagamentoStrategy criarPagamento(String tipo) {
         PagamentoStrategy estrategia = metodosPagamento.get(tipo.toLowerCase());
         if (estrategia == null) {
-            throw new IllegalArgumentException("Método de pagamento inválido: " + tipo);
+            throw new RegrasDeNegocioException("Método de pagamento inválido: " + tipo);
         }
         return estrategia;
     }
