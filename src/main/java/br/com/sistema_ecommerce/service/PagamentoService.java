@@ -1,5 +1,6 @@
 package br.com.sistema_ecommerce.service;
 
+import br.com.sistema_ecommerce.config.exception.NotFoundException;
 import br.com.sistema_ecommerce.controller.dto.PagamentoDTO;
 import br.com.sistema_ecommerce.factory.PagamentoFactory;
 import br.com.sistema_ecommerce.mapper.PagamentoMapper;
@@ -22,6 +23,11 @@ public class PagamentoService {
         PagamentoEntity entity = mapper.toEntity(request);
         repository.save(entity);
 
+        return mapper.toDTO(entity);
+    }
+
+    public PagamentoDTO consultarPagamento(Long id) {
+        PagamentoEntity entity = repository.findById(id).orElseThrow(() -> new NotFoundException("Pagamento não encontrado"));
         return mapper.toDTO(entity);
     }
 }

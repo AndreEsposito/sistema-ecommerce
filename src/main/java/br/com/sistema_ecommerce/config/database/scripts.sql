@@ -34,5 +34,5 @@ CREATE TABLE pagamento (
     id_pagamento INT AUTO_INCREMENT PRIMARY KEY,
     metodo VARCHAR(20) NOT NULL,
     valor DECIMAL(10,2) NOT NULL,
-    status ENUM('Pendente', 'Aprovado', 'Recusado', 'Cancelado') NOT NULL
+    status VARCHAR(20) NOT NULL
 );

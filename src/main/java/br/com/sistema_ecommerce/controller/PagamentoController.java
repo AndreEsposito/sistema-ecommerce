@@ -19,4 +19,10 @@ public class PagamentoController {
         var response = pagamentoService.processarPagamento(request);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> consultarPagamento(@PathVariable Long id) {
+        var response = pagamentoService.consultarPagamento(id);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }
