@@ -25,5 +25,6 @@ public class PagamentoEntity {
     private Double valor;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private StatusPagamentoEnum status;
 }
